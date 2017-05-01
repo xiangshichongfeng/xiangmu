@@ -34,6 +34,7 @@
      <template scope="scope">
         <el-button @click="handleClick" type="success" size="small">查看</el-button>
         <el-button @click="handleClick" type="success" size="small">编辑</el-button>
+        <el-button  type="success" size="small">删除</el-button>
       </template>
       </el-table-column>
   </el-table>

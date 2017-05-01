@@ -7,10 +7,10 @@
            </div>
            <div class="asideBanner">
                 <router-link class="box" :to="{ name: 'home'}">
-                    首页
+                   <i class="homeIcon"><icon name="home" scale="2"></icon></i> 首页
                 </router-link>
                 <router-link class="box" :to="{ name: 'course'}">
-                    课程管理
+                    教学材料管理
                 </router-link>
                 <router-link class="box" :to="{ name: 'infoselect'}">
                     信息查询
@@ -24,7 +24,7 @@
             <div class="logo"></div>
             <div class="right">
                 <div class="percenter">
-                    <i></i>个人中心
+                    <i><icon name="perIcon" scale="2"></icon></i>个人中心
                 </div>
                 <div class="loginout">
                     <i></i>退出
@@ -99,10 +99,11 @@ export default{
     box-sizing:border-box;
     color:#a9b0c2;
     font:400 16px/40px "microsoft yahei";
-    padding-left:40px;
+    padding-left:60px;
     text-decoration:none;
     /*background-color:#def;*/
     margin-bottom:10px;
+    position:relative;
 }
 .mainbanner{
     width: 100%;
@@ -141,11 +142,11 @@ export default{
 .mainbanner .right .percenter i{
     width: 25px;
     height:25px;
-    background-color: red;
+    /*background-color: red;*/
     display: block;
     position: absolute;
-    top: 18px;
-    left: -10px;
+    top: 3px;
+    left: -5px;
 }
 .mainbanner .right .loginout{
     width: 100px;
@@ -187,5 +188,10 @@ export default{
     position: absolute;
     top: 8px;
     left: 8px;
+}
+.homeIcon{
+    position:absolute;
+    top: 2px;
+    left: 35px;
 }
 </style>
