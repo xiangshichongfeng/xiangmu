@@ -3,7 +3,7 @@
         <div class="left">
             <div class="topTips">
                 学院新闻
-                <a href="###">更多>> </a>
+                <a href="###">更多<i class="el-icon-d-arrow-right more"></i></a>
             </div>
             <ul>
                 <li>巢湖学院圆满完成驻村扶贫工作队选派工作   <span>2017-4-28</span></li>
@@ -16,7 +16,7 @@
         <div class="right">
              <div class="topTips">
                 院部动态
-                <a href="###">更多>> </a>
+                <a href="###">更多<i class="el-icon-d-arrow-right more"></i> </a>
             </div>
             <ul>
                 <li>巢湖学院节能降耗月知识竞答大赛圆满落幕  <span>2017-4-28</span></li>
@@ -53,6 +53,9 @@
 <style scoped>
 .home{
     position:relative;
+}
+.more{
+    font-size:12px;
 }
 .left{
     width:63%;

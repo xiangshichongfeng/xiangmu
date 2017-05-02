@@ -7,27 +7,29 @@
            </div>
            <div class="asideBanner">
                 <router-link class="box" :to="{ name: 'home'}">
-                   <i class="homeIcon"><icon name="home" scale="2"></icon></i> 首页
+                   <i class="homemore"><icon name="home" scale="3"></icon></i> 首页
                 </router-link>
                 <router-link class="box" :to="{ name: 'course'}">
-                    教学材料管理
+                    <i class="coursemore"><icon name="course" scale="2.5"></icon></i>教学材料管理
                 </router-link>
                 <router-link class="box" :to="{ name: 'infoselect'}">
-                    信息查询
+                    <i class="selectmore"><icon name="select" scale="2.3"></icon></i>信息查询
                 </router-link>
                 <router-link class="box" :to="{ name: 'infopro'}">
-                    网上选课
+                    <i class="protmore"><icon name="inter" scale="3"></icon></i>网上选课
                 </router-link>
            </div>
        </div>
        <div class="mainbanner">
             <div class="logo"></div>
             <div class="right">
-                <div class="percenter">
-                    <i><icon name="perIcon" scale="2"></icon></i>个人中心
+                <router-link :to="{ name: 'user'}">
+                    <div class="percenter">
+                    <i><icon name="peopleIcon" scale="3"></icon></i>个人中心
                 </div>
+                </router-link>
                 <div class="loginout">
-                    <i></i>退出
+                    <i class="el-icon-message"></i>退出
                 </div>
             </div>
        </div>
@@ -58,6 +60,12 @@ export default{
     top: 0;
     left: 0;
 }
+/*网上选课,课程管理,信息查询*/
+.protmore, .homemore,.selectmore,.coursemore{
+    position:absolute;
+    top: 8px;
+    left: 25px;
+}
 .topBanner {
   width: 180px;
   height: 170px;
@@ -71,7 +79,8 @@ export default{
     width: 75px;
     height: 75px;
     margin:0px auto;
-    background-color:pink;
+    background:url("../assets/xscf.jpg") no-repeat center;
+    background-size:contain;
     border-radius: 50%;
 }
 .topBanner .name{
@@ -145,8 +154,8 @@ export default{
     /*background-color: red;*/
     display: block;
     position: absolute;
-    top: 3px;
-    left: -5px;
+    top: 8px;
+    left: -8px;
 }
 .mainbanner .right .loginout{
     width: 100px;
@@ -160,11 +169,12 @@ export default{
 .mainbanner .right .loginout i{
     width: 25px;
     height:25px;
-    background-color: red;
+    /*background-color: red;*/
     display: block;
     position: absolute;
-    top: 18px;
+    top: 22px;
     left: 105px;
+    font-size:20px;
 }
 .Banner{
     width: 100%;

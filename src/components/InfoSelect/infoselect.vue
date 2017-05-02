@@ -1,7 +1,7 @@
 <template>
    <div class="course">
         <div class="addCourse">
-            <el-button @click="handleClick"  class="addBTn" type="success">添加教学材料</el-button>
+            <div class="search"><el-input class="searchInput" v-model="input" placeholder="请输入内容"></el-input><el-button class="serchBtn" type="success">搜索</el-button></div>
         </div>
    <el-table
     :data="tableData2"
@@ -53,11 +53,12 @@
   export default {
     methods: {
       handleClick() {
-       this.$router.push({ name: 'edit'})
+       this.$router.push({ name: 'select'})
       }
     },
     data() {
       return {
+        input: '',
         tableData2: [{
           name: '李白',
           num: '1',
@@ -139,10 +140,26 @@
 }
 .addCourse{
     width: 100%;
-    height: 45px;
+    height: 75px;
     background-color: #fff;
     box-sizing: border-box;
+    padding-top:5px;
     position:relative;
+}
+.search{
+  width: 200px;
+  margin-top:10px;
+  margin-left:20px;
+  position:relative;
+}
+.serchBtn{
+  position:absolute;
+  top: 0;
+  right: 0;
+}
+.el-button{
+  border-top-left-radius:0px; 
+  border-bottom-left-radius:0px; 
 }
 .addCourse .addBTn{
     /*height: 30px;*/
@@ -159,6 +176,6 @@
     float: right;
 }
 .table{
-    margin-top:20px;
+    /*margin-top:20px;*/
 }
 </style>
