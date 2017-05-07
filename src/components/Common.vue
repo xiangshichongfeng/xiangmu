@@ -1,5 +1,5 @@
 <template>
-    <div id="common">
+    <div id="common" v-if=" show == true" >
        <div class="left">
            <div class="topBanner">
                <div class="img"></div>
@@ -49,6 +49,15 @@ export default{
      components: {
         Icon,
     },
+    computed:{
+        show(){
+            if(this.$route.name !='login' ){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    }
 }
 </script>
 <style scoped>

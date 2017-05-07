@@ -5,8 +5,9 @@ import Course from '@/components/Course/course.vue'
 import EditCourse from '@/components/Course/edit.vue'
 import InfoPro from '@/components/InfoPro/infopro.vue'
 import InfoSelect from '@/components/InfoSelect/infoselect.vue'
-import User from '@/components//user.vue'
+import User from '@/components/user.vue'
 import selectInfo from '@/components/InfoSelect/select.vue'
+import Login from '@/components/login.vue'
 
 
 
@@ -18,7 +19,8 @@ export default new Router({
   history: true,
   saveScrollPosition: false, // 不保存滚动位置
   routes: [
-    {path: '/', redirect: "/Home"},
+    {path: '/', redirect: "/Login"},
+    {path: '/login',name: 'login',component: Login,meta:{title:"登陆注册"}},
     {path: '/home',name: 'home',component: Home,meta:{title:"首页"}},
     {path: '/home/user',name: 'user',component: User,meta:{title:"个人中心"}},
     {path: '/course',name: 'course',component: Course,meta:{title:"课程管理"}},

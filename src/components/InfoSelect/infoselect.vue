@@ -53,7 +53,9 @@
   export default {
     methods: {
       handleClick() {
+        //  console.log()
        this.$router.push({ name: 'select'})
+      
       }
     },
     data() {
