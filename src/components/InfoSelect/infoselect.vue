@@ -10,7 +10,7 @@
     height="400"
     class="table">
         <el-table-column
-      prop="num"
+      prop="id"
       label="编号"
       width="150">
     </el-table-column>
@@ -38,10 +38,13 @@
       label="入职日期">
     </el-table-column>
     <el-table-column
-      prop="edit"
+      
       label="操作">
+      <!--<div>   -->
+        <!--<el-button  @click="handleClick()" type="success" size="small" >查看</el-button>-->
+      <!--</div>-->
      <template scope="scope">
-        <el-button @click="handleClick" type="success" size="small">查看</el-button>
+        <el-button prop="id"  @click="handleClick()" type="success" size="small" >查看</el-button>
         <el-button @click="handleClick" type="success" size="small">编辑</el-button>
       </template>
       </el-table-column>
@@ -53,15 +56,15 @@
   export default {
     methods: {
       handleClick() {
-        //  console.log()
-       this.$router.push({ name: 'select'})
-      
+        // this.$router.push('/course/edit/'+id)
+        
       }
     },
     data() {
       return {
         input: '',
         tableData2: [{
+          id:1,
           name: '李白',
           num: '1',
           sex: '男',
@@ -69,6 +72,7 @@
           dateB:'1990-2-21',
           dateJ:'2005-9-10',
         },{
+          id:2,
           name: '李白',
           num: '1',
           sex: '男',
@@ -76,6 +80,7 @@
           dateB:'1990-2-21',
           dateJ:'2005-9-10',
         }, {
+          id:3,
           name: '李白',
           num: '1',
           sex: '男',
@@ -83,6 +88,7 @@
           dateB:'1990-2-21',
           dateJ:'2005-9-10',
         },{
+          id:4,
           name: '李白',
           num: '1',
           sex: '男',
@@ -90,6 +96,7 @@
           dateB:'1990-2-21',
           dateJ:'2005-9-10',
         }, {
+          id:5,
           name: '李白',
           num: '1',
           sex: '男',
@@ -97,6 +104,7 @@
           dateB:'1990-2-21',
           dateJ:'2005-9-10',
         }, {
+          id:6,
           name: '李白',
           num: '1',
           sex: '男',
@@ -104,6 +112,7 @@
           dateB:'1990-2-21',
           dateJ:'2005-9-10',
         },{
+          id:7,
           name: '李白',
           num: '1',
           sex: '男',
@@ -111,6 +120,7 @@
           dateB:'1990-2-21',
           dateJ:'2005-9-10',
         },{
+          id:8,
           name: '李白',
           num: '1',
           sex: '男',
@@ -118,6 +128,7 @@
           dateB:'1990-2-21',
           dateJ:'2005-9-10',
         }, {
+          id:9,
           name: '李白',
           num: '1',
           sex: '男',
@@ -125,6 +136,7 @@
           dateB:'1990-2-21',
           dateJ:'2005-9-10',
         },{
+          id:10,
           name: '李白',
           num: '1',
           sex: '男',

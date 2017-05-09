@@ -8,11 +8,12 @@
         <div class="name">
             <span>密码：</span><el-input v-model="dataInfo.pass"  placeholder="请输入内容" class="nameValue"></el-input>
         </div>
-        
-        <div class="btn">
-            <el-button  @click="submit" type="success">登&nbsp;&nbsp;&nbsp;录</el-button>
+        <div class="name">
+            <span>确认密码：</span><el-input v-model="dataInfo.passensure"  placeholder="请输入内容" class="nameValue"></el-input>
         </div>
-        <div class="zhuce" @click="zhuce">立即注册</div>
+        <div class="btn">
+            <el-button  @click="submit" type="success">注&nbsp;&nbsp;&nbsp;册</el-button>
+        </div>
     </div>
     </div>
 </template>
@@ -33,12 +34,9 @@ export default{
                 //判断进行处理
                 //跳转
                 if(this.dataInfo.num == "123" && this.dataInfo.pass == "123" && this.dataInfo.passensure == "123"){
-                    this.$router.push({ name: 'home'})
+                    this.$router.push({ name: 'login'})
                 }
 
-            },
-            zhuce(){
-                this.$router.push({ name: 'zhuce'})
             }
             
         }
@@ -103,7 +101,7 @@ background-color: #2f4050;
         width: 200px;
 
       position: absolute;
-        top: 230px;
+        top: 280px;
         left: 0;
         right: 0;
         bottom: 0;
@@ -112,15 +110,5 @@ background-color: #2f4050;
     .el-button--success{
         width: 100%;
         /*background-color: blue;*/
-    }
-    .zhuce{
-        position: absolute;
-        top: 300px;
-        left: 250px;
-        right: 0;
-        bottom: 0;
-        margin: auto;  
-        /*font-size:16px;*/
-        color:#13ce66;
     }
 </style>

@@ -25,7 +25,7 @@
                 </el-option>
   </el-select>
         </div>
-        <el-button type="success" class="saveBtn">保存</el-button>
+        <el-button type="success" class="saveBtn" @click="test">保存</el-button>
    </div>
 </template>
 <script>
@@ -52,6 +52,11 @@
         }],
         value: ''
       };
+    },
+    methods:{
+        test(){
+            console.log(this.$route.params.id)
+        }
     }
   };
 </script>

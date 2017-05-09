@@ -51,10 +51,10 @@ export default{
     },
     computed:{
         show(){
-            if(this.$route.name !='login' ){
-                return true;
-            }else{
+            if(this.$route.name =='login' || this.$route.name =='zhuce'){
                 return false;
+            }else{
+                return true;
             }
         }
     }
