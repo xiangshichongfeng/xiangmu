@@ -38,8 +38,11 @@
       label="入职日期">
     </el-table-column>
     <el-table-column
-      prop="edit"
+      
       label="操作">
+      <!--<div>   -->
+        <!--<el-button  @click="handleClick()" type="success" size="small" >查看</el-button>-->
+      <!--</div>-->
      <template scope="scope">
         <el-button @click="showDetail(scope.row)" type="success" size="small">查看</el-button>
         <el-button @click="editInfo(scope.row)" type="success" size="small">编辑</el-button>
@@ -75,9 +78,9 @@
     },
 
     methods: {
-      handleClick() {
-       this.$router.push({ name: 'select'})
-      },
+      // handleClick() {
+      //  this.$router.push({ name: 'select'})
+      // },
 
       showDetail(row){
         this.$router.push('/infoselect/info/'+row.id)

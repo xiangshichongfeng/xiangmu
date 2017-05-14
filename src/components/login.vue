@@ -36,7 +36,6 @@ export default{
                 }
             } 
         },
-        
         methods:{
             login() {
                 var query = {
@@ -140,6 +139,7 @@ background-color: #2f4050;
 
       position: absolute;
         top: 245px;
+
         left: 0;
         right: 0;
         bottom: 0;

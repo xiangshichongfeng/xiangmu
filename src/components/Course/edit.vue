@@ -83,6 +83,11 @@
           '艺术学院'
         ],
       };
+    },
+    methods:{
+        test(){
+            console.log(this.$route.params.id)
+        }
     }
   };
 </script>
