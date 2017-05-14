@@ -3,7 +3,7 @@
    <div class="user">
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
   <el-form-item label="姓名" prop="name" >
-    <el-input v-model="ruleForm.name" placeholder="请输入姓名"></el-input>
+    <el-input v-model="ruleForm.name"  placeholder="请输入姓名"></el-input>
   </el-form-item>
   <el-form-item label="学号/工号" prop="region" required>
     <el-input v-model="ruleForm.num" :disabled="true" placeholder="请输入学号或者工号"></el-input>
@@ -29,13 +29,13 @@
     </el-col>
   </el-form-item>
  <el-form-item label="所属院系" prop="belong" required>
-    <el-input type='text' v-model="ruleForm.belong"  placeholder="请输入所属院系"></el-input>
+    <el-input v-model="ruleForm.belong" placeholder="请输入活动区域"></el-input>
   </el-form-item>
   <el-form-item label="详细介绍" prop="desc">
     <el-input type="textarea" v-model="ruleForm.desc"></el-input>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="editForm">修改</el-button>
+    <el-button type="primary" @click="cancelForm">取消</el-button>
   </el-form-item>
 </el-form>
 </div></div>
@@ -52,8 +52,8 @@
         this.ruleForm.name = info.name;
         this.ruleForm.num = info.xuehao;
         this.ruleForm.belong = info.activityArea;
-       this.ruleForm.date1 = info.birthday;
-       this.ruleForm.date2 = info.workday;
+        this.ruleForm.date1 = info.birthday;
+        this.ruleForm.date2 = info.workday;
         this.ruleForm.sex= info.sex;
         this.ruleForm.desc = info.detail;
         console.log('add');
@@ -79,7 +79,7 @@
         rules: {
           name: [
             { required: true, message: '请输入姓名', trigger: 'blur' },
-            { min: 2, max: 5, message: '长度在 2 到 5 个字符', trigger: 'blur' }
+            { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
           ],
           num: [
             { required: true, message: '请输入学号或者工号', trigger: 'blur' },
@@ -105,32 +105,12 @@
           }
         });
       },
-      
       resetForm(formName) {
         this.$refs[formName].resetFields();
       },
 
-      editForm() {
-        var query = {
-          name:this.ruleForm.name?this.ruleForm.name:null,
-          xuehao: this.ruleForm.num?this.ruleForm.num:null,
-          activityArea: this.ruleForm.belong?this.ruleForm.belong:null,
-          birthday: this.ruleForm.date1?this.ruleForm.date1:null,
-          workday: this.ruleForm.date2?this.ruleForm.date2:null,
-          sex: this.ruleForm.sex?this.ruleForm.sex:null,
-          detail:this.ruleForm.desc?this.ruleForm.desc:null,
-        }
-        api._post({ url: 'member/edit', data: query}).then((result) => {
-            if(result.data.code == 200) {
-               alert('修改成功');
-               this.$router.push('/infoselect/');
-            } else {
-                alert('修改失败，权限不够');
-            }
-         }).catch((err) => {
-            console.log(err);
-        })
-        
+      cancelForm() {
+        this.$router.push('/infoselect');
       }
     }
   }

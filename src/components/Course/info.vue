@@ -22,7 +22,7 @@
               </option>
             </select>
         </div>
-        <el-button  @click="editInfo" type="success" class="saveBtn">修改</el-button>
+        <el-button  @click="backList" type="success" class="saveBtn">取消</el-button>
    </div>
 </template>
 <script>
@@ -45,26 +45,9 @@
       })
     },
 
-    methods: {
-      editInfo() {
-        var query = {
-            name: this.name,
-            num: this.num,
-            nanyi: this.checkList,
-            xueyuan: this.yuanxi,
-            id: this.id
-        }
-        api._post({ url: 'material/edit', data: query}).then((result) => {
-            if(result.data.code == 200) {
-               alert(result.data.msg);
-               this.$router.push('/course/');
-            } else {
-               alert(result.data.msg);
-            }
-         }).catch((err) => {
-            console.log(err);
-        })
-        
+     methods: {
+      backList() {
+        this.$router.push('/course/');
       }
     },
 

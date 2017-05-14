@@ -4,11 +4,13 @@
             <el-button @click="handleClick"  class="addBTn" type="success">添加教学材料</el-button>
         </div>
    <el-table
-    :data="tableData2"
+    :data="tableData"
     style="width: 100%"
     border
     height="400"
-    class="table">
+    class="table" v-loading="loading"
+ element-loading-text="拼命加载中..."
+>
       <el-table-column
       prop="name"
       label="名称"
@@ -28,79 +30,70 @@
       prop="sort"
       label="难易程度">
     </el-table-column>
-    <el-table-column
-      prop="edit"
-      label="操作">
-     <template scope="scope">
-        <el-button @click="handleClick" type="success" size="small">查看</el-button>
-        <el-button @click="handleClick" type="success" size="small">编辑</el-button>
-        <el-button  type="success" size="small">删除</el-button>
+    <el-table-column prop="id" label="操作" >
+      <template scope="scope">
+        <el-button  @click="showDetail(scope.row)" type="success" size="small">查看</el-button>
+        <el-button @click="editInfo(scope.row)" type="success" size="small">编辑</el-button>
+        <el-button  @click="deleteMaterial(scope.row)" type="success" size="small">删除</el-button>
       </template>
       </el-table-column>
+      
   </el-table>
+
    </div>
 </template>
 
 <script>
+  import * as api from '../../pro/api'
   export default {
+    beforeMount () {
+      const _this = this
+      api._post({ url: 'material/list', data: {}}).then((result) => {
+        var meterialArray =  result.data.data.materials
+        for(var i = 0; i < meterialArray.length; ++i) {
+            var column_data = {};
+            column_data.id = meterialArray[i]._id;
+            column_data.name = meterialArray[i].name;
+            column_data.num = meterialArray[i].num;
+            column_data.sort = meterialArray[i].nanyi;
+            column_data.belong = meterialArray[i].xueyuan;
+            this.tableData.push(column_data);
+        }
+      }).catch((err) => {
+         console.log(err);
+      })
+    },
+
     methods: {
+      show(row) {
+        this.currentId = row.id;
+      },
+      
+      showDetail(row){
+        this.$router.push('/course/info/'+row.id)
+      },
+
+      editInfo(row) {
+         this.$router.push('/course/edit/'+row.id)
+      },
+      
+      deleteMaterial(row) {
+        api._post({ url: 'material/delete', data: {id: row.id}}).then((result) => {
+          alert(result.data.msg);
+          location.reload(); 
+        }).catch((err) => {
+          console.log(err);
+        })
+      },
+
       handleClick() {
-       this.$router.push({ name: 'edit'})
-      }
+       this.$router.push({ name: 'add'})
+      },
     },
     data() {
       return {
-        tableData2: [{
-          name: 'javaScript基础',
-          num: '22',
-          sort: '中级',
-          belong: '信息工程学院',
-        },{
-          name: 'javaScript基础',
-          num: '22',
-          sort: '中级',
-           belong: '信息工程学院',
-        },  {
-          name: 'javaScript基础',
-          num: '22',
-          sort: '中级',
-           belong: '信息工程学院',
-        }, {
-          name: 'javaScript基础',
-          num: '22',
-          sort: '中级',
-          belong: '信息工程学院',
-        }, {
-          name: 'javaScript基础',
-          num: '22',
-          sort: '中级',
-           belong: '信息工程学院',
-        }, {
-          name: 'javaScript基础',
-          num: '22',
-          sort: '中级',
-           belong: '信息工程学院',
-        }, {
-          name: 'javaScript基础',
-          num: '22',
-          sort: '中级',
-          belong: '信息工程学院',
-        }, {
-          name: 'javaScript基础',
-          num: '22',
-          sort: '中级',
-           belong: '信息工程学院',
-        }, {
-          name: 'javaScript基础',
-          num: '22',
-          sort: '中级',
-           belong: '信息工程学院',
-        }, {
-          name: 'javaScript基础',
-          num: '22',
-          sort: '中级',
-           belong: '信息工程学院',
-        }]
+        currentId: "",
+        tableData: []
       }
     }
   }

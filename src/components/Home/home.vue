@@ -49,6 +49,20 @@
 </template>
 <script>
 
+import * as api from '../../pro/api'
+
+export default {
+  name: 'veditor',
+  beforeMount () {
+    const _this = this
+    api._post({ url: 'member/list', data: {}}).then((result) => {
+      
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
+
+}
 </script>
 <style scoped>
 .home{

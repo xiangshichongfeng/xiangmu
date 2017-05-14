@@ -6,7 +6,7 @@
     <el-input v-model="ruleForm.name" placeholder="请输入姓名"></el-input>
   </el-form-item>
   <el-form-item label="学号/工号" prop="region" required>
-    <el-input v-model="ruleForm.num" placeholder="请输入学号或者工号"></el-input>
+    <el-input v-model="ruleForm.num" :disabled="true" placeholder="请输入学号或者工号"></el-input>
   </el-form-item>
   <el-form-item label="性别" prop="sex" required>
     <el-radio-group v-model="ruleForm.sex">
@@ -28,12 +28,10 @@
       </el-form-item>
     </el-col>
   </el-form-item>
-<el-form-item label="活动区域" prop="belong" required>
-    <el-select v-model="ruleForm.belong" placeholder="请选择活动区域">
-      <el-option label="区域一" value="shanghai"></el-option>
-      <el-option label="区域二" value="beijing"></el-option>
-    </el-select>
+   <el-form-item label="所属院系" prop="belong" required>
+    <el-input v-model="ruleForm.belong" placeholder="请输入所属院系"></el-input>
   </el-form-item>
+
   <el-form-item label="详细介绍" prop="desc">
     <el-input type="textarea" v-model="ruleForm.desc"></el-input>
   </el-form-item>
@@ -45,7 +43,23 @@
 </div></div>
 </template>
 <script>
+import * as api from '../pro/api'
   export default {
+    beforeMount () {
+      const _this = this
+      api._post({ url: 'member/info', data: {}}).then((result) => {
+        var info =  result.data.info;
+        this.ruleForm.name = info.name;
+        this.ruleForm.num = info.xuehao;
+        this.ruleForm.belong = info.activityArea;
+        
+        this.ruleForm.sex= info.sex;
+        this.ruleForm.desc = info.detail;
+      }).catch((err) => {
+         console.log(err);
+      })
+    },
+
     data() {
       return {
         ruleForm: {
@@ -63,28 +77,18 @@
         rules: {
           name: [
             { required: true, message: '请输入姓名', trigger: 'blur' },
-            { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+            { min: 2, max: 5, message: '长度在 2 到 5 个字符', trigger: 'blur' }
           ],
           num: [
             { required: true, message: '请输入学号或者工号', trigger: 'blur' },
             { min: 5, max: 8, message: '长度在 5 到 8 个字符', trigger: 'blur' }
           ],
-          belong:[ { required: true, message: '请选择活动区域', trigger: 'change' }],
           date1: [
             { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
           ],
           date2: [
             { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
           ],
-          type: [
-            { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
-          ],
-          resource: [
-            { required: true, message: '请选择活动资源', trigger: 'change' }
-          ],
-          desc: [
-            { required: true, message: '请填写活动形式', trigger: 'blur' }
-          ]
         }
       };
     },
@@ -93,8 +97,28 @@
         this.$refs[formName].validate((valid) => {
           if (valid) {
             alert('submit!');
+            var query = {
+              name:this.ruleForm.name,
+              xuehao: this.ruleForm.num,
+              activityArea: this.ruleForm.belong,
+              birthday: this.ruleForm.date1,
+              workday: this.ruleForm.date2,
+              sex: this.ruleForm.sex,
+              detail:this.ruleForm.desc,
+            };
+            api._post({ url: 'member/edit', data: query}).then((result) => {
+              if(result.data.code == 200) {
+                alert('修好成功');
+                this.$router.push('/infoselect/');
+              } else {
+                alert('修好失败');
+              }
+            }).catch((err) => {
+              console.log(err);
+            })
           } else {
             console.log('error submit!!');
+            alert('输入信息不完整，请重新输入');
             return false;
           }
         });

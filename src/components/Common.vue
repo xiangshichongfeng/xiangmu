@@ -1,9 +1,9 @@
 <template>
-    <div id="common">
+    <div id="common" v-if="show == true">
        <div class="left">
            <div class="topBanner">
                <div class="img"></div>
-               <div class="name">相识重逢</div>
+               <div class="name">{{ user.id }}</div>
            </div>
            <div class="asideBanner">
                 <router-link class="box" :to="{ name: 'home'}">
@@ -28,14 +28,16 @@
                     <i><icon name="peopleIcon" scale="3"></icon></i>个人中心
                 </div>
                 </router-link>
+                <router-link :to="{ name: 'login'}">
                 <div class="loginout">
                     <i class="el-icon-message"></i>退出
                 </div>
+                </router-link>
             </div>
        </div>
        <div class="Banner">
           <div class="tips">
-             <i></i> 当前位置：{{ $route.meta.title }}
+             <i><icon name="current" scale="3"></icon></i>当前位置：{{ $route.meta.title }}
           </div>
        </div>
     </div>
@@ -49,6 +51,25 @@ export default{
      components: {
         Icon,
     },
+    computed:{
+        show(){
+            if(this.$route.name =='login' || this.$route.name =='zhuce'){
+                return false;
+            }else{
+                return true;
+            }
+        }
+    },
+    data() {
+      return {
+        user :{
+            id:window.localStorage.getItem('num')
+        }
+      }
+    },
+    mounted(){
+        console.log(window.localStorage.getItem('num'))
+    }
 }
 </script>
 <style scoped>
@@ -193,7 +214,7 @@ export default{
 .Banner i{
     width: 25px;
     height:25px;
-    background-color: red;
+    /*background-color: red;*/
     display: block;
     position: absolute;
     top: 8px;

@@ -1,17 +1,17 @@
 <template>
    <div class="edit">
         <div class="name">
-            <span>教学材料名称：</span><el-input v-model='name' class="nameValue"></el-input>
+            <span>教学材料名称：</span><el-input  v-model="name" placeholder="请输入内容" class="nameValue"></el-input>
         </div>
         <div class="name">
-            <span>教学材料数量：</span><el-input  v-model='num'  class="nameValue"></el-input>
+            <span>教学材料数量：</span><el-input  v-model="num" placeholder="请输入内容" class="nameValue"></el-input>
         </div>
          <div class="name">
             <span>难易程度：</span>
             <el-checkbox-group v-model="checkList" class="check">
-                <el-checkbox label="初级" ></el-checkbox>
-                <el-checkbox label="中级"></el-checkbox>
-                <el-checkbox label="高级"></el-checkbox>
+                <el-checkbox label="初级" value='初级'></el-checkbox>
+                <el-checkbox label="中级" value='中级'></el-checkbox>
+                <el-checkbox label="高级" value='高级'></el-checkbox>
             </el-checkbox-group>
         </div>
         <div class="name">
@@ -22,55 +22,36 @@
               </option>
             </select>
         </div>
-        <el-button  @click="editInfo" type="success" class="saveBtn">修改</el-button>
+        <el-button  @click="addMaterial" type="success" class="saveBtn">保存</el-button>
    </div>
 </template>
 <script>
  import * as api from '../../pro/api'
  const cityOptions = ['初级','中级','高级'];
   export default {
-    beforeMount () {
-      const _this = this;
-      console.log(this.$route.params.id);
-      this.id = this.$route.params.id;
-      api._post({ url: 'material/info', data: {id: this.id}}).then((result) => {
-        var info =  result.data.info;
-        this.name = info.name;
-        this.num = info.num;
-        this.checkList.push(info.nanyi);
-        this.yuanxi = info.xueyuan;
-        
-      }).catch((err) => {
-         console.log(err);
-      })
-    },
-
     methods: {
-      editInfo() {
+      addMaterial() {
         var query = {
             name: this.name,
             num: this.num,
             nanyi: this.checkList,
-            xueyuan: this.yuanxi,
-            id: this.id
+            xueyuan: this.yuanxi
         }
-        api._post({ url: 'material/edit', data: query}).then((result) => {
+        api._post({ url: 'material/add', data: query}).then((result) => {
             if(result.data.code == 200) {
                alert(result.data.msg);
-               this.$router.push('/course/');
+               window.location.href = '/course';
             } else {
                alert(result.data.msg);
             }
          }).catch((err) => {
             console.log(err);
         })
-        
       }
     },
 
     data() {
       return {
-        id: "",
         name:"",
         num:"",
         checkList: [],
@@ -82,6 +63,7 @@
           '文教学院',
           '艺术学院'
         ],
+       
       };
     }
   };

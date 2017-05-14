@@ -11,6 +11,9 @@ import './assets/base.css'
 import "./router/index.js";
 export default {
   created() {
+    if(this.$route.name =='login' || this.$route.name =='zhuce'){
+        window.localStorage.clear();
+    }
   },
   components: {
     Common,
